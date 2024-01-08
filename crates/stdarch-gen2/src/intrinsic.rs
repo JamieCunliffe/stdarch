@@ -809,6 +809,8 @@ pub struct Intrinsic {
     pub visibility: FunctionVisibility,
     #[serde(default)]
     pub doc: Option<WildString>,
+    #[serde(default)]
+    pub url: Option<WildString>,
     #[serde(flatten)]
     pub signature: Signature,
     /// Function sequential composition
@@ -1425,9 +1427,17 @@ impl ToTokens for Intrinsic {
 
         if let Some(doc) = &self.doc {
             let mut doc = vec![doc.to_string()];
-
+            let url: String = self.url.as_ref().map_or_else(
+                || {
+                    format!(
+                        "https://developer.arm.com/architectures/instruction-sets/intrinsics/{}",
+                        &signature.doc_name()
+                    )
+                },
+                |url| url.to_string(),
+            );
             doc.push(String::new());
-            doc.push(format!("[Arm's documentation](https://developer.arm.com/architectures/instruction-sets/intrinsics/{})", &signature.doc_name()));
+            doc.push(format!("[Arm's documentation]({})", url));
 
             if safety.has_doc_comments() {
                 doc.push(String::new());
