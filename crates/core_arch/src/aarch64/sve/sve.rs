@@ -9792,6 +9792,146 @@ pub fn svdup_n_u64_x(pg: svbool_t, op: u64) -> svuint64_t {
 pub fn svdup_n_u64_z(pg: svbool_t, op: u64) -> svuint64_t {
     svdup_n_u64_m(svdup_n_u64(0), pg, op)
 }
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_f32(data: float32x4_t) -> svfloat32_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv4f32.v4f32"
+        )]
+        fn _svdup_neonq_f32(op0: svfloat32_t, op1: float32x4_t, idx: i64) -> svfloat32_t;
+    }
+    unsafe {
+        let op = _svdup_neonq_f32(simd_reinterpret(()), data, 0);
+        svdupq_lane_f32(op, 0)
+    }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_f64(data: float64x2_t) -> svfloat64_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv2f64.v2f64"
+        )]
+        fn _svdup_neonq_f64(op0: svfloat64_t, op1: float64x2_t, idx: i64) -> svfloat64_t;
+    }
+    unsafe {
+        let op = _svdup_neonq_f64(simd_reinterpret(()), data, 0);
+        svdupq_lane_f64(op, 0)
+    }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_s8(data: int8x16_t) -> svint8_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv16i8.v16i8"
+        )]
+        fn _svdup_neonq_s8(op0: svint8_t, op1: int8x16_t, idx: i64) -> svint8_t;
+    }
+    unsafe {
+        let op = _svdup_neonq_s8(simd_reinterpret(()), data, 0);
+        svdupq_lane_s8(op, 0)
+    }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_s16(data: int16x8_t) -> svint16_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv8i16.v8i16"
+        )]
+        fn _svdup_neonq_s16(op0: svint16_t, op1: int16x8_t, idx: i64) -> svint16_t;
+    }
+    unsafe {
+        let op = _svdup_neonq_s16(simd_reinterpret(()), data, 0);
+        svdupq_lane_s16(op, 0)
+    }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_s32(data: int32x4_t) -> svint32_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv4i32.v4i32"
+        )]
+        fn _svdup_neonq_s32(op0: svint32_t, op1: int32x4_t, idx: i64) -> svint32_t;
+    }
+    unsafe {
+        let op = _svdup_neonq_s32(simd_reinterpret(()), data, 0);
+        svdupq_lane_s32(op, 0)
+    }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_s64(data: int64x2_t) -> svint64_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv2i64.v2i64"
+        )]
+        fn _svdup_neonq_s64(op0: svint64_t, op1: int64x2_t, idx: i64) -> svint64_t;
+    }
+    unsafe {
+        let op = _svdup_neonq_s64(simd_reinterpret(()), data, 0);
+        svdupq_lane_s64(op, 0)
+    }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_u8(data: uint8x16_t) -> svuint8_t {
+    unsafe { svdup_neonq_s8(data.as_signed()).as_unsigned() }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_u16(data: uint16x8_t) -> svuint16_t {
+    unsafe { svdup_neonq_s16(data.as_signed()).as_unsigned() }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_u32(data: uint32x4_t) -> svuint32_t {
+    unsafe { svdup_neonq_s32(data.as_signed()).as_unsigned() }
+}
+#[doc = "Broadcast the 128 bit NEON vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svdup_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svdup_neonq_u64(data: uint64x2_t) -> svuint64_t {
+    unsafe { svdup_neonq_s64(data.as_signed()).as_unsigned() }
+}
 #[doc = "Broadcast a quadword of scalars"]
 #[doc = ""]
 #[doc = "[Arm's documentation](https://developer.arm.com/architectures/instruction-sets/intrinsics/svdupq_lane[_f32])"]
@@ -11713,6 +11853,128 @@ pub fn svget4_u32<const IMM_INDEX: i32>(tuple: svuint32x4_t) -> svuint32_t {
 pub fn svget4_u64<const IMM_INDEX: i32>(tuple: svuint64x4_t) -> svuint64_t {
     static_assert_range!(IMM_INDEX, 0, 3);
     unsafe { svget4_s64::<IMM_INDEX>(tuple.as_signed()).as_unsigned() }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_f32(data: svfloat32_t) -> float32x4_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.extract.v4f32.nxv4f32"
+        )]
+        fn _svget_neonq_f32(op0: svfloat32_t, idx: i64) -> float32x4_t;
+    }
+    unsafe { _svget_neonq_f32(data, 0) }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_f64(data: svfloat64_t) -> float64x2_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.extract.v2f64.nxv2f64"
+        )]
+        fn _svget_neonq_f64(op0: svfloat64_t, idx: i64) -> float64x2_t;
+    }
+    unsafe { _svget_neonq_f64(data, 0) }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_s8(data: svint8_t) -> int8x16_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.extract.v16i8.nxv16i8"
+        )]
+        fn _svget_neonq_s8(op0: svint8_t, idx: i64) -> int8x16_t;
+    }
+    unsafe { _svget_neonq_s8(data, 0) }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_s16(data: svint16_t) -> int16x8_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.extract.v8i16.nxv8i16"
+        )]
+        fn _svget_neonq_s16(op0: svint16_t, idx: i64) -> int16x8_t;
+    }
+    unsafe { _svget_neonq_s16(data, 0) }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_s32(data: svint32_t) -> int32x4_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.extract.v4i32.nxv4i32"
+        )]
+        fn _svget_neonq_s32(op0: svint32_t, idx: i64) -> int32x4_t;
+    }
+    unsafe { _svget_neonq_s32(data, 0) }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_s64(data: svint64_t) -> int64x2_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.extract.v2i64.nxv2i64"
+        )]
+        fn _svget_neonq_s64(op0: svint64_t, idx: i64) -> int64x2_t;
+    }
+    unsafe { _svget_neonq_s64(data, 0) }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_u8(data: svuint8_t) -> uint8x16_t {
+    unsafe { svget_neonq_s8(data.as_signed()).as_unsigned() }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_u16(data: svuint16_t) -> uint16x8_t {
+    unsafe { svget_neonq_s16(data.as_signed()).as_unsigned() }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_u32(data: svuint32_t) -> uint32x4_t {
+    unsafe { svget_neonq_s32(data.as_signed()).as_unsigned() }
+}
+#[doc = "Get the first 128 bits of SVE vector as a Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svget_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svget_neonq_u64(data: svuint64_t) -> uint64x2_t {
+    unsafe { svget_neonq_s64(data.as_signed()).as_unsigned() }
 }
 #[doc = "Create linear series"]
 #[doc = ""]
@@ -37717,6 +37979,128 @@ pub fn svset4_u32<const IMM_INDEX: i32>(tuple: svuint32x4_t, x: svuint32_t) -> s
 pub fn svset4_u64<const IMM_INDEX: i32>(tuple: svuint64x4_t, x: svuint64_t) -> svuint64x4_t {
     static_assert_range!(IMM_INDEX, 0, 3);
     unsafe { svset4_s64::<IMM_INDEX>(tuple.as_signed(), x.as_signed()).as_unsigned() }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_f32(sve_data: svfloat32_t, neon_data: float32x4_t) -> svfloat32_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv4f32.v4f32"
+        )]
+        fn _svset_neonq_f32(op0: svfloat32_t, op1: float32x4_t, idx: i64) -> svfloat32_t;
+    }
+    unsafe { _svset_neonq_f32(sve_data, neon_data, 0) }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_f64(sve_data: svfloat64_t, neon_data: float64x2_t) -> svfloat64_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv2f64.v2f64"
+        )]
+        fn _svset_neonq_f64(op0: svfloat64_t, op1: float64x2_t, idx: i64) -> svfloat64_t;
+    }
+    unsafe { _svset_neonq_f64(sve_data, neon_data, 0) }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_s8(sve_data: svint8_t, neon_data: int8x16_t) -> svint8_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv16i8.v16i8"
+        )]
+        fn _svset_neonq_s8(op0: svint8_t, op1: int8x16_t, idx: i64) -> svint8_t;
+    }
+    unsafe { _svset_neonq_s8(sve_data, neon_data, 0) }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_s16(sve_data: svint16_t, neon_data: int16x8_t) -> svint16_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv8i16.v8i16"
+        )]
+        fn _svset_neonq_s16(op0: svint16_t, op1: int16x8_t, idx: i64) -> svint16_t;
+    }
+    unsafe { _svset_neonq_s16(sve_data, neon_data, 0) }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_s32(sve_data: svint32_t, neon_data: int32x4_t) -> svint32_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv4i32.v4i32"
+        )]
+        fn _svset_neonq_s32(op0: svint32_t, op1: int32x4_t, idx: i64) -> svint32_t;
+    }
+    unsafe { _svset_neonq_s32(sve_data, neon_data, 0) }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_s64(sve_data: svint64_t, neon_data: int64x2_t) -> svint64_t {
+    extern "C" {
+        #[cfg_attr(
+            target_arch = "aarch64",
+            link_name = "llvm.experimental.vector.insert.nxv2i64.v2i64"
+        )]
+        fn _svset_neonq_s64(op0: svint64_t, op1: int64x2_t, idx: i64) -> svint64_t;
+    }
+    unsafe { _svset_neonq_s64(sve_data, neon_data, 0) }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_u8(sve_data: svuint8_t, neon_data: uint8x16_t) -> svuint8_t {
+    unsafe { svset_neonq_s8(sve_data.as_signed(), neon_data.as_signed()).as_unsigned() }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_u16(sve_data: svuint16_t, neon_data: uint16x8_t) -> svuint16_t {
+    unsafe { svset_neonq_s16(sve_data.as_signed(), neon_data.as_signed()).as_unsigned() }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_u32(sve_data: svuint32_t, neon_data: uint32x4_t) -> svuint32_t {
+    unsafe { svset_neonq_s32(sve_data.as_signed(), neon_data.as_signed()).as_unsigned() }
+}
+#[doc = "Set the first 128 bits of SVE vector to Neon vector"]
+#[doc = ""]
+#[doc = "[Arm's documentation](https://arm-software.github.io/acle/main/acle.html#svset_neonq)"]
+#[inline]
+#[target_feature(enable = "sve")]
+pub fn svset_neonq_u64(sve_data: svuint64_t, neon_data: uint64x2_t) -> svuint64_t {
+    unsafe { svset_neonq_s64(sve_data.as_signed(), neon_data.as_signed()).as_unsigned() }
 }
 #[doc = "Initialize the first-fault register to all-true"]
 #[doc = ""]

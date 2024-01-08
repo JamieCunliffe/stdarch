@@ -4844,3 +4844,49 @@ intrinsics:
     n_variant_op: op2
     compose:
       - LLVMLink: { name: "fminnm.{sve_type}" }
+
+  - name: svdup_neonq_{type}
+    doc: Broadcast the 128 bit NEON vector
+    url: https://arm-software.github.io/acle/main/acle.html#svdup_neonq
+    arguments: ["data: {neon_type}"]
+    return_type: "{sve_type}"
+    types: [f32, f64, i8, i16, i32, i64, u8, u16, u32, u64]
+    assert_instr: []
+    compose:
+      - LLVMLink:
+          name: llvm.experimental.vector.insert.{sve_type}.{neon_type}
+          arguments: ["op0: {sve_type}", "op1: {neon_type}", "idx: i64"]
+      - Let:
+          - op
+          - FnCall:
+              - "{llvm_link}"
+              - - SvUndef
+                - $data
+                - 0
+      - FnCall: ["svdupq_lane_{type}", [$op, 0]]
+
+  - name: svset_neonq_{type}
+    doc: Set the first 128 bits of SVE vector to Neon vector
+    url: https://arm-software.github.io/acle/main/acle.html#svset_neonq
+    arguments: ["sve_data: {sve_type}", "neon_data: {neon_type}"]
+    return_type: "{sve_type}"
+    types: [f32, f64, i8, i16, i32, i64, u8, u16, u32, u64]
+    assert_instr: []
+    compose:
+      - LLVMLink:
+          name: llvm.experimental.vector.insert.{sve_type}.{neon_type}
+          arguments: ["op0: {sve_type}", "op1: {neon_type}", "idx: i64"]
+      - FnCall: ["{llvm_link}", [$sve_data, $neon_data, 0]]
+
+  - name: svget_neonq_{type}
+    doc: Get the first 128 bits of SVE vector as a Neon vector
+    url: https://arm-software.github.io/acle/main/acle.html#svget_neonq
+    arguments: ["data: {sve_type}"]
+    return_type: "{neon_type}"
+    types: [f32, f64, i8, i16, i32, i64, u8, u16, u32, u64]
+    assert_instr: []
+    compose:
+      - LLVMLink:
+          name: llvm.experimental.vector.extract.{neon_type}.{sve_type}
+          arguments: ["op0: {sve_type}", "idx: i64"]
+      - FnCall: ["{llvm_link}", [$data, 0]]

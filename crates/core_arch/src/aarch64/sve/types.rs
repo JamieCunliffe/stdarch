@@ -1,5 +1,6 @@
 use super::*;
 #[allow(improper_ctypes)]
+use crate::core_arch::arch::aarch64::*;
 use crate::marker::ConstParamTy;
 
 pub(super) trait AsUnsigned {
@@ -201,6 +202,11 @@ impl_sign_conversions! {
     (*mut i16, *mut u16)
     (*mut i32, *mut u32)
     (*mut i64, *mut u64)
+
+    (int8x16_t, uint8x16_t)
+    (int16x8_t, uint16x8_t)
+    (int32x4_t, uint32x4_t)
+    (int64x2_t, uint64x2_t)
 }
 
 impl_sign_conversions_sv! {
